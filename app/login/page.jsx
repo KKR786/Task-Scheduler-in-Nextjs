@@ -6,11 +6,11 @@ import logo from '@/public/assets/logo.png'
 function Login() {
   return (
     <section className="gradient-form h-full bg-neutral-200">
-      <div className="h-[100vh] p-10">
-        <div className="g-6 flex h-full flex-wrap items-center justify-center text-neutral-800">
+      <div className="lg:h-[100vh] p-10">
+        <div className="flex h-full flex-wrap items-center justify-center text-neutral-800">
           <div className="w-full">
             <div className="block rounded-lg bg-white shadow-lg">
-              <div className="g-0 lg:flex lg:flex-wrap">
+              <div className="lg:flex lg:flex-wrap">
                 
                 <div className="px-4 md:px-0 lg:w-6/12">
                   <div className="md:mx-6 md:p-12">
@@ -44,14 +44,14 @@ function Login() {
                 </div>
                 <div
                   className="flex items-center rounded-b-lg lg:w-6/12 lg:rounded-r-lg lg:rounded-bl-none"
-                  style={{'background': 'linear-gradient(to right, #de6161, #2657eb)'}}
+                  style={{'background-color': 'maroon'}}
                 >
-                  <div className="px-4 py-6 md:mx-6 text-white md:p-12">
+                  <div className="px-4 py-6 m-auto text-white md:p-12">
                     <h4 className="mb-6 text-xl text-center font-semibold">
-                      Task Scheduler
+                      Welcome Back
                     </h4>
                     <p className="text-sm">
-                        Effortlessly manage your tasks with our intuitive software task scheduler. Seamlessly add and organize your to-do list, ensuring a structured approach to your daily workflow. Stay on top of your tasks and accomplish more with efficient task management
+                        Complete Your Task With a Flow
                     </p>
                   </div>
                 </div>
