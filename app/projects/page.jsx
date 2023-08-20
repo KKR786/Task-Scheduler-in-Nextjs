@@ -1,11 +1,11 @@
 
 
-function page() {
+function Projects() {
   return (
     <div className="lg:ml-[18rem]">
-      Tasks
+      Projects
     </div>
   )
 }
 
-export default page
+export default Projects

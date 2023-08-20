@@ -1,23 +1,28 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from 'next/navigation';
+import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import logo from "@/public/assets/logo.png";
 
 export default function Navbar() {
   const [active, setActive] = useState("");
+  const [open, setOpen] = useState(false);
   const pathname = usePathname();
   console.log(pathname, active);
 
   useEffect(() => {
     setActive(pathname);
-  },[pathname])
+  }, [pathname]);
 
   const handleActive = (link) => {
     setActive(link);
-  }
+  };
+
+  const hamburger = () => {
+    setOpen(true);
+  };
 
   return (
     <div>
@@ -36,7 +41,7 @@ export default function Navbar() {
             <ul role="list" className="flex flex-col flex-1 gap-y-[1.75rem]">
               <li>
                 <ul role="list" className="mx-[-0.5rem]">
-                  <li onClick={() => handleActive('/')}>
+                  <li onClick={() => handleActive("/")}>
                     <Link
                       href="/"
                       className={`${
@@ -61,20 +66,18 @@ export default function Navbar() {
                       Dashboard{" "}
                     </Link>
                   </li>
-                  <li onClick={() => handleActive('/tasks')}>
+                  <li onClick={() => handleActive("/tasks")}>
                     <Link
                       href="/tasks"
                       className={`${
                         active === "/tasks" ? "text-white" : "text-gray-400"
                       } p-[0.5rem] rounded-md font-semibold leading-6 flex gap-x-[0.75rem] text-sm`}
                     >
-                      <span className="material-symbols-outlined">
-                        task
-                      </span>
+                      <span className="material-symbols-outlined">task</span>
                       Tasks{" "}
                     </Link>
                   </li>
-                  <li onClick={() => handleActive('/projects')}>
+                  <li onClick={() => handleActive("/projects")}>
                     <Link
                       href="/projects"
                       className={`${
@@ -99,7 +102,7 @@ export default function Navbar() {
                       Projects{" "}
                     </Link>
                   </li>
-                  <li onClick={() => handleActive('/calendar')}>
+                  <li onClick={() => handleActive("/calendar")}>
                     <Link
                       href="/calendar"
                       className={`${
@@ -124,7 +127,7 @@ export default function Navbar() {
                       Calendar{" "}
                     </Link>
                   </li>
-                  <li onClick={() => handleActive('/reports')}>
+                  <li onClick={() => handleActive("/reports")}>
                     <Link
                       href="/reports"
                       className={`${
@@ -165,6 +168,7 @@ export default function Navbar() {
           <button
             type="button"
             className="m-[-0.625rem] p-[0.625rem] lg:hidden"
+            onClick={hamburger}
           >
             <span className="t">Open sidebar</span>
             <svg
@@ -183,10 +187,184 @@ export default function Navbar() {
               ></path>
             </svg>
           </button>
-          <div
-            className="h-[1.5rem] w-[1px] lg:hidden"
-            aria-hidden="true"
-          ></div>
+
+          {open &&
+          <div className='z-50 relative ease-in duration-800'>
+            <div className="fixed inset-0 bg-gray-800"></div>
+            <div className="fixed inset-0 flex">
+              <div className="flex-1 w-full max-w-[20rem] flex relative mr-[4rem] delay-300 ease-in duration-200">
+                <div className="flex pt-5 justify-center w-[4rem] top-0 left-full absolute">
+                  <button type="button" className="p-[0.625rem] m-[-0.6254rem]" onClick={()=> setOpen(false)}>
+                    <span className="t">Close sidebar</span>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke-width="1.5"
+                      stroke="currentColor"
+                      aria-hidden="true"
+                      className="w-[1.5rem] h-[1.5rem] text-white"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M6 18L18 6M6 6l12 12"
+                      ></path>
+                    </svg>
+                  </button>
+                </div>
+                <div className="bg-gray-900 flex pb-[1rem] px-[1.5rem] flex-col overflow-y-auto gap-y-[1.25rem] grow">
+                  <div className="py-2">
+                    <Image
+                      className="mx-auto"
+                      src={logo}
+                      alt="logo"
+                      width={90}
+                      height={90}
+                    />
+                  </div>
+                  <nav className="flex flex-col flex-1">
+                    <ul
+                      role="list"
+                      className="flex flex-col flex-1 gap-y-[1.75rem]"
+                    >
+                      <li>
+                        <ul role="list" className="mx-[-0.5rem]">
+                          <li onClick={() => handleActive("/")}>
+                            <Link
+                              href="/"
+                              className={`${
+                                active === "/" ? "text-white bg-indigo-700" : "text-gray-400"
+                              } p-[0.5rem] rounded-md font-semibold leading-6 flex gap-x-[0.75rem] text-sm`}
+                            >
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke-width="1.5"
+                                stroke="currentColor"
+                                aria-hidden="true"
+                                className="shrink-0 w-[1.5rem] h-[1.5rem]"
+                              >
+                                <path
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                  d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"
+                                ></path>
+                              </svg>
+                              Dashboard{" "}
+                            </Link>
+                          </li>
+                          <li onClick={() => handleActive("/tasks")}>
+                            <Link
+                              href="/tasks"
+                              className={`${
+                                active === "/tasks"
+                                  ? "text-white bg-indigo-700"
+                                  : "text-gray-400"
+                              } p-[0.5rem] rounded-md font-semibold leading-6 flex gap-x-[0.75rem] text-sm`}
+                            >
+                              <span className="material-symbols-outlined">
+                                task
+                              </span>
+                              Tasks{" "}
+                            </Link>
+                          </li>
+                          <li onClick={() => handleActive("/projects")}>
+                            <Link
+                              href="/projects"
+                              className={`${
+                                active === "/projects"
+                                  ? "text-white bg-indigo-700"
+                                  : "text-gray-400"
+                              } p-[0.5rem] rounded-md font-semibold leading-6 flex gap-x-[0.75rem] text-sm`}
+                            >
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke-width="1.5"
+                                stroke="currentColor"
+                                aria-hidden="true"
+                                className="shrink-0 w-[1.5rem] h-[1.5rem]"
+                              >
+                                <path
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                  d="M2.25 12.75V12A2.25 2.25 0 014.5 9.75h15A2.25 2.25 0 0121.75 12v.75m-8.69-6.44l-2.12-2.12a1.5 1.5 0 00-1.061-.44H4.5A2.25 2.25 0 002.25 6v12a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9a2.25 2.25 0 00-2.25-2.25h-5.379a1.5 1.5 0 01-1.06-.44z"
+                                ></path>
+                              </svg>
+                              Projects{" "}
+                            </Link>
+                          </li>
+                          <li onClick={() => handleActive("/calendar")}>
+                            <Link
+                              href="/calendar"
+                              className={`${
+                                active === "/calendar"
+                                  ? "text-white bg-indigo-700"
+                                  : "text-gray-400"
+                              } p-[0.5rem] rounded-md font-semibold leading-6 flex gap-x-[0.75rem] text-sm`}
+                            >
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke-width="1.5"
+                                stroke="currentColor"
+                                aria-hidden="true"
+                                className="shrink-0 w-[1.5rem] h-[1.5rem]"
+                              >
+                                <path
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                  d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5"
+                                ></path>
+                              </svg>
+                              Calendar{" "}
+                            </Link>
+                          </li>
+                          <li onClick={() => handleActive("/reports")}>
+                            <Link
+                              href="/reports"
+                              className={`${
+                                active === "/reports"
+                                  ? "text-white bg-indigo-700"
+                                  : "text-gray-400"
+                              } p-[0.5rem] rounded-md font-semibold leading-6 flex gap-x-[0.75rem] text-sm`}
+                            >
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke-width="1.5"
+                                stroke="currentColor"
+                                aria-hidden="true"
+                                className="shrink-0 w-[1.5rem] h-[1.5rem]"
+                              >
+                                <path
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                  d="M10.5 6a7.5 7.5 0 107.5 7.5h-7.5V6z"
+                                ></path>
+                                <path
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                  d="M13.5 10.5H21A7.5 7.5 0 0013.5 3v7.5z"
+                                ></path>
+                              </svg>
+                              Reports{" "}
+                            </Link>
+                          </li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </nav>
+                </div>
+              </div>
+            </div>
+          </div>}
+
           <div className="flex flex-1 gap-x-[1rem] lg:gap-x-[1.5rem]">
             <form className="relative flex flex-1" action="#" method="GET">
               <label for="search-field" className="t">
