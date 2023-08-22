@@ -13,6 +13,7 @@ export default function Navbar() {
   console.log(pathname, active);
 
   useEffect(() => {
+    setOpen(false)
     setActive(pathname);
   }, [pathname]);
 
@@ -189,10 +190,10 @@ export default function Navbar() {
           </button>
 
           {open &&
-          <div className='z-50 relative ease-in duration-800'>
-            <div className="fixed inset-0 bg-gray-800"></div>
+          <div className='z-50 relative delay-300 ease-in duration-500'>
+            <div className="fixed inset-0 opacity-100 bg-gray-900/80"></div>
             <div className="fixed inset-0 flex">
-              <div className="flex-1 w-full max-w-[20rem] flex relative mr-[4rem] delay-300 ease-in duration-200">
+              <div className="flex-1 w-full max-w-[19rem] flex relative mr-[4rem]">
                 <div className="flex pt-5 justify-center w-[4rem] top-0 left-full absolute">
                   <button type="button" className="p-[0.625rem] m-[-0.6254rem]" onClick={()=> setOpen(false)}>
                     <span className="t">Close sidebar</span>
@@ -216,14 +217,13 @@ export default function Navbar() {
                 <div className="bg-gray-900 flex pb-[1rem] px-[1.5rem] flex-col overflow-y-auto gap-y-[1.25rem] grow">
                   <div className="py-2">
                     <Image
-                      className="mx-auto"
                       src={logo}
                       alt="logo"
-                      width={90}
-                      height={90}
+                      width={60}
+                      height={60}
                     />
                   </div>
-                  <nav className="flex flex-col flex-1">
+                  <nav className="mt-8 flex flex-col flex-1">
                     <ul
                       role="list"
                       className="flex flex-col flex-1 gap-y-[1.75rem]"
