@@ -1,6 +1,6 @@
 import '@/styles/globals.css';
 import { Inter } from 'next/font/google'
-import Provider from '@/components/Provider';
+import AuthProvider from '@/app/context/AuthProvider';
 import Navbar from '@/components/Navbar';
 
 const inter = Inter({ subsets: ['latin'] })
@@ -18,10 +18,10 @@ export default function RootLayout({ children }) {
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
       </head>
       <body className={inter.className}>
-        <Provider>
+        <AuthProvider>
           <Navbar />
           {children}
-        </Provider>
+        </AuthProvider>
       </body>
     </html>
   )
