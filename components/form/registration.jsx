@@ -7,6 +7,8 @@ function RegistrationComponent() {
     const [designation, setDesignation] = useState('')
     const [password, setPassword] = useState('')
 
+    
+
   return (
     <div>
       <form>
@@ -54,6 +56,7 @@ function RegistrationComponent() {
             style={{
               'background-color': "darkmagenta",
             }}
+            onClick={handleSubmit}
           >
             Sign Up
           </button>
