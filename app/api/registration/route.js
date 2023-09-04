@@ -5,12 +5,12 @@ import { dbConnection } from "@/app/db/database";
 
 export async function POST (req) {
     try {
-        const {name, email, password} = await req.json();
+        const {name, email, designation, password} = await req.json();
 
         await dbConnection();
 
         const hashedPassword = await bcrypt.hash(password, 10);
-        await User.create({name, email, password: hashedPassword});
+        await User.create({name, email, designation, password: hashedPassword});
 
         return NextResponse.json({message: 'New User Created'}, { status: 201 });
 

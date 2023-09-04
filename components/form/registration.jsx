@@ -4,14 +4,27 @@ import React, {useState} from "react";
 
 function RegistrationComponent() {
     const [name, setName] = useState('')
+    const [email, setEmail] = useState('')
     const [designation, setDesignation] = useState('')
     const [password, setPassword] = useState('')
 
-    
+    const handleSubmit = async (e) => {
+      e.preventDefault();
+
+      try {
+        await fetch ('/api/register', {
+          method: 'POST',
+          headers: { 'Content-Type' : 'application/json'},
+          body: JSON.stringify({ name, email, designation, password })
+        })
+      } catch (error) {
+        
+      }
+    }
 
   return (
     <div>
-      <form>
+      <form onSubmit={handleSubmit}>
         <p className="mb-4 text-center font-semibold">Registration</p>
 
         <div className="relative mb-4">
@@ -23,6 +36,18 @@ function RegistrationComponent() {
             />
           <label className={`pointer-events-none peer-focus:bg-white peer-focus:px-2 absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-focus:text-primary ${name ? '-translate-y-[0.9rem] scale-[0.8] bg-white px-2' : ''} motion-reduce:transition-none`}>
             Username
+          </label>
+        </div>
+
+        <div className="relative mb-4">
+          <input
+            type="text"
+            className="peer block min-h-[auto] border w-full rounded px-3 py-[0.45rem] leading-[1.6] outline-none transition-all duration-200 ease-linear motion-reduce:transition-none placeholder:opacity-0 focus:placeholder:opacity-0 focus:border-2 focus:border-teal-400 caret-teal-400"
+            placeholder="Email"
+            value={email} onChange={(e) =>setEmail(e.target.value)} 
+            />
+          <label className={`pointer-events-none peer-focus:bg-white peer-focus:px-2 absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-focus:text-primary ${email ? '-translate-y-[0.9rem] scale-[0.8] bg-white px-2' : ''} motion-reduce:transition-none`}>
+            Email
           </label>
         </div>
 
@@ -56,7 +81,6 @@ function RegistrationComponent() {
             style={{
               'background-color': "darkmagenta",
             }}
-            onClick={handleSubmit}
           >
             Sign Up
           </button>
