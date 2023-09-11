@@ -10,14 +10,14 @@ const userSchema = new Schema({
     type: String,
     required: [true, 'Name is required!']
   },
+  designation: {
+    type: String,
+  },
   password: {
     type: String,
     required: [true, 'Password is required!'],
-  },
-  image: {
-    type: String,
   }
-});
+}, { timestamps: true });
 
 const User = models.User || model("User", userSchema);
 
